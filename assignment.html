@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Assignment</title>
+</head>
+<body>
+
+<button id="getDataBtn">Get Data</button>
+<script>
+$("button").click(function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "",
+        data: { 
+            "departmentId": "224"
+        },
+        success: function(result) {
+           /* result = {"employees":[    
+    {"name":"John", "email":"john@gmail.com", "age":23},    
+    {"name":"David", "email":"david@gmail.com", "age":28},  
+    {"name":"Cole", "email":"cole@gmail.com", "age":33}
+]} ;*/
+        for(let i = 0 ; i<result['employees'].length;i++){
+            $('#add').append('<tr>');
+            $('#add').append('<td>'+result['employees'][i]['name']+'</td>');
+            $('#add').append('<td>'+result['employees'][i]['email']+'</td>');
+            $('#add').append('<td>'+result['employees'][i]['age']+'</td>');
+            $('#add').append('</tr>');}
+        },
+        error: function(result) {
+            alert('error');
+        }
+    });
+});
+</script>
+<table>
+ <thead>
+  <tr>
+   <th>Name</th>
+   <th>Email</th>
+   <th>Age</th>
+  </tr>
+ </thead>
+ <tbody id='add'>
+  <tr >
+   <td></td>
+  </tr>
+ </tbody>
+</table>
+</body>
+</html>
